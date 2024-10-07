@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_blo/model/favourite_item_model.dart';
 
 abstract class FavouriteAppEvent extends Equatable {
   const FavouriteAppEvent();
@@ -7,3 +8,8 @@ abstract class FavouriteAppEvent extends Equatable {
 }
 
 class FetchFavouriteList extends FavouriteAppEvent {}
+
+class FavouriteItem extends FavouriteAppEvent {
+  final FavouriteItemModel item;
+  const FavouriteItem({required this.item});
+}

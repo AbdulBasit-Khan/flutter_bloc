@@ -32,9 +32,15 @@ class FavouriteAppScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final item = state.favouriteItemList[index];
 
-                      return Card(
-                        child: ListTile(
-                          title: Text(item.value.toString()),
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Card(
+                          child: ListTile(
+                            title: Text(item.value.toString()),
+                            trailing: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.favorite_outline)),
+                          ),
                         ),
                       );
                     });

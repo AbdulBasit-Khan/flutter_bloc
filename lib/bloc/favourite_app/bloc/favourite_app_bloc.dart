@@ -10,11 +10,15 @@ class FavouriteAppBloc extends Bloc<FavouriteAppEvent, FavouriteAppState> {
   FavouriteAppBloc(this.favouriteRepository)
       : super(const FavouriteAppState()) {
     on<FetchFavouriteList>(fetchList);
+    on<FavouriteItem>(_addFavouriteItem);
   }
-  Future<void> fetchList(
+  void fetchList(
       FetchFavouriteList event, Emitter<FavouriteAppState> emit) async {
     favouriteList = await favouriteRepository.fetchItem();
     emit(state.copyWith(
         favouriteItemList: favouriteList, listStatus: ListStatus.success));
   }
+
+  void _addFavouriteItem(
+      FavouriteItem event, Emitter<FavouriteAppState> emit) async {}
 }
