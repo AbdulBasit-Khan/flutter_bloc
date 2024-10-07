@@ -1,8 +1,9 @@
-part of 'favourite_app_bloc.dart';
+import 'package:equatable/equatable.dart';
 
-sealed class FavouriteAppEvent extends Equatable {
+abstract class FavouriteAppEvent extends Equatable {
   const FavouriteAppEvent();
-
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
+
+class FetchFavouriteList extends FavouriteAppEvent {}
