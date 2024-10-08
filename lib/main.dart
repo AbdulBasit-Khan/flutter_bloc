@@ -5,9 +5,6 @@ import 'package:flutter_blo/bloc/switch_example/switch_bloc.dart';
 import 'package:flutter_blo/bloc/todo/bloc/to_do_bloc.dart';
 import 'package:flutter_blo/repository/favourite_repository.dart';
 import 'package:flutter_blo/ui/favourite_app/favourite_app_screen.dart';
-import 'package:flutter_blo/ui/image_picker/image_picker_screen.dart';
-import 'package:flutter_blo/ui/switch_example/switch_example.dart';
-import 'package:flutter_blo/ui/todo/to_do_screen/to_do_screen.dart';
 import 'package:flutter_blo/utils/image_picker_utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
