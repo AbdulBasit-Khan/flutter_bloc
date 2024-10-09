@@ -5,20 +5,26 @@ import 'package:flutter_blo/bloc/favourite_app/bloc/favourite_app_state.dart';
 import 'package:flutter_blo/model/favourite_item_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FavouriteAppScreen extends StatelessWidget {
+class FavouriteAppScreen extends StatefulWidget {
   const FavouriteAppScreen({super.key});
+
+  @override
+  State<FavouriteAppScreen> createState() => _FavouriteAppScreenState();
+}
+
+class _FavouriteAppScreenState extends State<FavouriteAppScreen> {
+  @override
+  void initState() {
+    context.read<FavouriteAppBloc>().add(FetchFavouriteList());
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            context.read<FavouriteAppBloc>().add(FetchFavouriteList());
-          },
-          child: const Icon(Icons.add),
-        ),
         appBar: AppBar(
-          title: const Text("Favourite App"),
+          title: const Text("Flutter Bloc"),
         ),
         body: BlocBuilder<FavouriteAppBloc, FavouriteAppState>(
           builder: (context, state) {

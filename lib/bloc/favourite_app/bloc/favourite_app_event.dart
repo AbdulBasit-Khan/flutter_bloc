@@ -13,3 +13,13 @@ class FavouriteItem extends FavouriteAppEvent {
   final FavouriteItemModel item;
   const FavouriteItem({required this.item});
 }
+
+class SelectItem extends FavouriteAppEvent {
+  final FavouriteItemModel item;
+  const SelectItem({required this.item});
+}
+
+class UnSelectItem extends FavouriteAppEvent {
+  final FavouriteItemModel item;
+  const UnSelectItem({required this.item});
+}
