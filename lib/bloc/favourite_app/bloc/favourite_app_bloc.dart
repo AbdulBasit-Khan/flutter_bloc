@@ -28,8 +28,14 @@ class FavouriteAppBloc extends Bloc<FavouriteAppEvent, FavouriteAppState> {
       FavouriteItem event, Emitter<FavouriteAppState> emit) async {
     final index =
         favouriteList.indexWhere((element) => element.id == event.item.id);
+    if (tempFavouriteList.contains(favouriteList[index])) {
+      tempFavouriteList.remove(favouriteList[index]);
+      tempFavouriteList.add(event.item);
+    }
     favouriteList[index] = event.item;
-    emit(state.copyWith(favouriteItemList: List.from(favouriteList)));
+    emit(state.copyWith(
+        favouriteItemList: List.from(favouriteList),
+        tempFavouriteItemList: List.from(tempFavouriteList)));
   }
 
   void _selectItem(SelectItem event, Emitter<FavouriteAppState> emit) async {
