@@ -23,3 +23,5 @@ class UnSelectItem extends FavouriteAppEvent {
   final FavouriteItemModel item;
   const UnSelectItem({required this.item});
 }
+
+class DeleteItem extends FavouriteAppEvent {}

@@ -25,6 +25,24 @@ class _FavouriteAppScreenState extends State<FavouriteAppScreen> {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Flutter Bloc"),
+          actions: [
+            BlocBuilder<FavouriteAppBloc, FavouriteAppState>(
+              builder: (context, state) {
+                return Visibility(
+                  visible:
+                      state.tempFavouriteItemList.isNotEmpty ? true : false,
+                  child: IconButton(
+                      onPressed: () {
+                        context.read<FavouriteAppBloc>().add(DeleteItem());
+                      },
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      )),
+                );
+              },
+            )
+          ],
         ),
         body: BlocBuilder<FavouriteAppBloc, FavouriteAppState>(
           builder: (context, state) {
@@ -43,7 +61,20 @@ class _FavouriteAppScreenState extends State<FavouriteAppScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Card(
                           child: ListTile(
-                            leading: Checkbox(value: true, onChanged: (val) {}),
+                            leading: Checkbox(
+                                value:
+                                    state.tempFavouriteItemList.contains(item),
+                                onChanged: (val) {
+                                  if (val!) {
+                                    context
+                                        .read<FavouriteAppBloc>()
+                                        .add(SelectItem(item: item));
+                                  } else {
+                                    context
+                                        .read<FavouriteAppBloc>()
+                                        .add(UnSelectItem(item: item));
+                                  }
+                                }),
                             title: Text(item.value.toString()),
                             trailing: IconButton(
                                 onPressed: () {

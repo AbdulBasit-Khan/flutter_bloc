@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_blo/bloc/favourite_app/bloc/favourite_app_event.dart';
 import 'package:flutter_blo/bloc/favourite_app/bloc/favourite_app_state.dart';
 import 'package:flutter_blo/model/favourite_item_model.dart';
@@ -16,6 +14,7 @@ class FavouriteAppBloc extends Bloc<FavouriteAppEvent, FavouriteAppState> {
     on<FavouriteItem>(addFavouriteItem);
     on<SelectItem>(_selectItem);
     on<UnSelectItem>(_unSelectItem);
+    on<DeleteItem>(_deleteItem);
   }
   void fetchList(
       FetchFavouriteList event, Emitter<FavouriteAppState> emit) async {
@@ -24,6 +23,7 @@ class FavouriteAppBloc extends Bloc<FavouriteAppEvent, FavouriteAppState> {
         favouriteItemList: List.from(favouriteList),
         listStatus: ListStatus.success));
   }
+
   void addFavouriteItem(
       FavouriteItem event, Emitter<FavouriteAppState> emit) async {
     final index =
@@ -34,12 +34,22 @@ class FavouriteAppBloc extends Bloc<FavouriteAppEvent, FavouriteAppState> {
 
   void _selectItem(SelectItem event, Emitter<FavouriteAppState> emit) async {
     tempFavouriteList.add(event.item);
-    emit(state.copyWith(favouriteItemList: List.from(favouriteList)));
+    emit(state.copyWith(tempFavouriteItemList: List.from(tempFavouriteList)));
   }
 
   void _unSelectItem(
       UnSelectItem event, Emitter<FavouriteAppState> emit) async {
     tempFavouriteList.remove(event.item);
-    emit(state.copyWith(favouriteItemList: List.from(favouriteList)));
+    emit(state.copyWith(tempFavouriteItemList: List.from(tempFavouriteList)));
+  }
+
+  void _deleteItem(DeleteItem event, Emitter<FavouriteAppState> emit) async {
+    for (int i = 0; i < tempFavouriteList.length; i++) {
+      favouriteList.remove(tempFavouriteList[i]);
+    }
+    tempFavouriteList.clear();
+    emit(state.copyWith(
+        tempFavouriteItemList: List.from(tempFavouriteList),
+        favouriteItemList: List.from(favouriteList)));
   }
 }
