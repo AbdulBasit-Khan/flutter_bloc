@@ -7,23 +7,29 @@ class PostsState extends Equatable {
   final List<PostModel> postsList;
   final List<PostModel> tempPostsList;
   final String message;
-  const PostsState(
-      {this.postStatus = PostStatus.loading,
-      this.postsList = const <PostModel>[],
-      this.tempPostsList = const <PostModel>[],
-      this.message = ''});
+  final String searchMessage;
+  const PostsState({
+    this.postStatus = PostStatus.loading,
+    this.postsList = const <PostModel>[],
+    this.tempPostsList = const <PostModel>[],
+    this.message = '',
+    this.searchMessage = '',
+  });
   PostsState copyWith(
       {PostStatus? postStatus,
       List<PostModel>? postsList,
       String? message,
+      String? searchMessage,
       List<PostModel>? tempPostsList}) {
     return PostsState(
         postsList: postsList ?? this.postsList,
         tempPostsList: tempPostsList ?? this.tempPostsList,
         postStatus: postStatus ?? this.postStatus,
+        searchMessage: searchMessage ?? this.searchMessage,
         message: message ?? this.message);
   }
 
   @override
-  List<Object?> get props => [postStatus, postsList, message, tempPostsList];
+  List<Object?> get props =>
+      [postStatus, postsList, message, tempPostsList, searchMessage];
 }

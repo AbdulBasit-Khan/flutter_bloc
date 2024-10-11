@@ -23,9 +23,16 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
   }
 
   Future<void> _filterList(SearchItem event, Emitter<PostsState> emit) async {
-    tempPostsList = state.postsList
-        .where(
-            (element) => element.id.toString() == event.searchText.toString())
-        .toList();
+    if (event.searchText.isEmpty) {
+      emit(state.copyWith(tempPostsList: []));
+    } else {
+      tempPostsList = state.postsList
+          .where(
+              (element) => element.id.toString() == event.searchText.toString())
+          .toList();
+      if (tempPostsList.isEmpty) {
+        emit(state.copyWith(tempPostsList: tempPostsList));
+      } else {}
+    }
   }
 }
