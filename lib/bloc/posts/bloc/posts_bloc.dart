@@ -27,8 +27,10 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       emit(state.copyWith(tempPostsList: [], searchMessage: ''));
     } else {
       tempPostsList = state.postsList
-          .where(
-              (element) => element.id.toString() == event.searchText.toString())
+          .where((element) => element.email
+              .toString()
+              .toLowerCase()
+              .contains(event.searchText.toString().toLowerCase()))
           .toList();
       if (tempPostsList.isEmpty) {
         emit(state.copyWith(
