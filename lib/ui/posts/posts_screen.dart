@@ -46,35 +46,37 @@ class _PostsScreenState extends State<PostsScreen> {
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                      itemCount: state.tempPostsList.isEmpty
-                          ? state.postsList.length
-                          : state.tempPostsList.length,
-                      itemBuilder: (context, index) {
-                        if (state.tempPostsList.isEmpty) {
-                          final item = state.postsList[index];
+                  child: state.searchMessage.isNotEmpty
+                      ? Center(child: Text(state.searchMessage.toString()))
+                      : ListView.builder(
+                          itemCount: state.tempPostsList.isEmpty
+                              ? state.postsList.length
+                              : state.tempPostsList.length,
+                          itemBuilder: (context, index) {
+                            if (state.tempPostsList.isEmpty) {
+                              final item = state.postsList[index];
 
-                          return Card(
-                            child: ListTile(
-                              title: Text(
-                                item.email.toString(),
-                              ),
-                              subtitle: Text(item.body.toString()),
-                            ),
-                          );
-                        } else {
-                          final item = state.tempPostsList[index];
+                              return Card(
+                                child: ListTile(
+                                  title: Text(
+                                    item.email.toString(),
+                                  ),
+                                  subtitle: Text(item.body.toString()),
+                                ),
+                              );
+                            } else {
+                              final item = state.tempPostsList[index];
 
-                          return Card(
-                            child: ListTile(
-                              title: Text(
-                                item.email.toString(),
-                              ),
-                              subtitle: Text(item.body.toString()),
-                            ),
-                          );
-                        }
-                      }),
+                              return Card(
+                                child: ListTile(
+                                  title: Text(
+                                    item.email.toString(),
+                                  ),
+                                  subtitle: Text(item.body.toString()),
+                                ),
+                              );
+                            }
+                          }),
                 ),
               ],
             );
