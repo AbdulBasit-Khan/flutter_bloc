@@ -32,17 +32,34 @@ class _PostsScreenState extends State<PostsScreen> {
           case PostStatus.failure:
             return Center(child: Text(state.message));
           case PostStatus.success:
-            return ListView.builder(
-                itemCount: state.postsList.length,
-                itemBuilder: (context, index) {
-                  final item = state.postsList[index];
-                  return ListTile(
-                    title: Text(
-                      item.email.toString(),
-                    ),
-                    subtitle: Text(item.body.toString()),
-                  );
-                });
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                        hintText: "Search with Email",
+                        border: OutlineInputBorder()),
+                    onChanged: (val) {},
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: state.postsList.length,
+                      itemBuilder: (context, index) {
+                        final item = state.postsList[index];
+                        return Card(
+                          child: ListTile(
+                            title: Text(
+                              item.email.toString(),
+                            ),
+                            subtitle: Text(item.body.toString()),
+                          ),
+                        );
+                      }),
+                ),
+              ],
+            );
         }
       }),
     );
