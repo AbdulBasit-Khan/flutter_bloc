@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_blo/bloc/login/bloc/login_event.dart';
 import 'package:flutter_blo/bloc/login/bloc/login_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,15 +20,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void _loginApi(LoginApi event, Emitter<LoginState> emit) async {
+    emit(state.copyWith(loginStatus: LoginStatus.loading));
     Map data = {'email': state.email, 'password': state.password};
     try {
-      final response = await http.post(Uri.parse(""), body: data);
+      final response =
+          await http.post(Uri.parse("https://reqres.in/api/login"), body: data);
+      var data1 = jsonDecode(response.body);
       if (response.statusCode == 200) {
         emit(state.copyWith(
             message: "login successful", loginStatus: LoginStatus.success));
       } else {
         emit(state.copyWith(
-            message: 'Something went wrong', loginStatus: LoginStatus.error));
+            message: data1['error'], loginStatus: LoginStatus.error));
       }
     } catch (e) {
       emit(state.copyWith(
