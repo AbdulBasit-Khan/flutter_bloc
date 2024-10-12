@@ -5,7 +5,6 @@ import 'package:flutter_blo/bloc/posts/bloc/posts_bloc.dart';
 import 'package:flutter_blo/bloc/switch_example/switch_bloc.dart';
 import 'package:flutter_blo/bloc/todo/bloc/to_do_bloc.dart';
 import 'package:flutter_blo/repository/favourite_repository.dart';
-import 'package:flutter_blo/ui/counter/counter_screen.dart';
 import 'package:flutter_blo/ui/login/login_screen.dart';
 import 'package:flutter_blo/utils/image_picker_utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

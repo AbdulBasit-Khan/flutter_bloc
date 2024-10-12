@@ -77,7 +77,15 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 50,
               ),
-              ElevatedButton(onPressed: () {}, child: const Text("Login"))
+              BlocBuilder<LoginBloc, LoginState>(
+                buildWhen: (current, previous) => false,
+                builder: (context, state) {
+                  return ElevatedButton(
+                      onPressed: () {
+                        // context.read<LoginBloc>().add(LoginEvent());
+                      }, child: const Text("Login"));
+                },
+              )
             ],
           ),
         ),
